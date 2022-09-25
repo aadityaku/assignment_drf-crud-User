@@ -8,6 +8,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 #for new User create 
 class Register(APIView):
@@ -21,7 +24,8 @@ class Register(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class TodoView(APIView):
-  
+    authentication_classes=[JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     def get(self,request,id=None):
        
         if id != None: #single task retrive
