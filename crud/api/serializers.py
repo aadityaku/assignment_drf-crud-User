@@ -10,12 +10,6 @@ class TodoSerializer(serializers.ModelSerializer):
         model=Todo
         fields=['id','task','status']
 
-# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-#     @classmethod
-#     def get_token(cls, user):
-#         token = super(MyTokenObtainPairSerializer,cls).get_token(user)
-#         token['username'] = user.username
-#         return token
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     email=serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
